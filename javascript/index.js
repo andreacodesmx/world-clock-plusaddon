@@ -8,9 +8,27 @@ function updateSeconds() {
   meridaTimeElement.innerHTML = meridaTime.format(
     "h:mm:ss [<small>]A[</small>]"
   );
+  //Ljubljana
+ let ljubljanaElement = document.querySelector("#ljubljana");
+ let ljubljanaDateElement = ljubljanaElement.querySelector(".date");
+ let ljubljanaTimeElement = ljubljanaElement.querySelector(".time");
+ let ljubljanaTime = moment().tz("Europe/Ljubljana");
+ ljubljanaDateElement.innerHTML = ljubljanaTime.format("dddd, MMMM Do, YYYY");
+ ljubljanaTimeElement.innerHTML = ljubljanaTime.format(
+   "h:mm:ss [<small>]A[</small>]"
+ );
+//Istanbul
+let istanbulElement = document.querySelector("#istanbul");
+let istanbulDateElement = istanbulElement.querySelector(".date");
+let istanbulTimeElement = istanbulElement.querySelector(".time");
+let istanbulTime = moment().tz("Asia/Istanbul");
+istanbulDateElement.innerHTML = istanbulTime.format("dddd, MMMM Do, YYYY");
+istanbulTimeElement.innerHTML = istanbulTime.format(
+  "h:mm:ss [<small>]A[</small>]"
+);
 }
-
 function updateCity(event) {
+  setInterval(() => {
   let cityTimeZone = event.target.value;
   if (cityTimeZone === "current") {
     cityTimeZone = moment.tz.guess();
@@ -29,6 +47,7 @@ function updateCity(event) {
             </div>
           </div>
           `;
+        }, 1000);
 }
 updateSeconds();
 setInterval(updateSeconds, 1000);
